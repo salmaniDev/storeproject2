@@ -1,0 +1,36 @@
+import { useState, useEffect } from "react"
+
+// hooks
+import { useProducts } from "../context/ProductContext"
+
+// components
+import SearchBox from "../components/SearchBox"
+import Card from "../components/Card"
+import Loader from '../components/Loader'
+
+
+
+function ProductsPage() {
+
+    const products = useProducts()
+
+    const [display, setDisplay] = useState([])
+
+    useEffect(() => {
+        setDisplay(products)
+
+        console.log(display);
+    }, [products])
+
+
+    return (
+        <>
+            <SearchBox />
+
+            {!display.length && <Loader />}
+
+        </>
+    )
+}
+
+export default ProductsPage

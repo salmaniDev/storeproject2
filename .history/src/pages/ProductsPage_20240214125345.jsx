@@ -9,31 +9,29 @@ import Card from "../components/Card"
 import Loader from '../components/Loader'
 import SideBar from "../components/SideBar"
 import { useSearchParams } from "react-router-dom"
-
+ 
 
 
 function ProductsPage() {
 
     const products = useProducts()
-    const [searchParams, setSearchParams] = useSearchParams({})
 
-    const [display, setDisplay] = useState([])
-    const [serach, setSearch] = useState('')
-    const [query, setQuery] = useState('')
+    const [display, setDisplay] = useState([]) 
 
     useEffect(() => {
         setDisplay(products)
-    }, [products])
+    }, [products]) 
 
-    useEffect(() => {
-        setSearchParams(query)
-    }, [query])
+    const [searchParams ,setSearchParams] = useSearchParams()
 
+    const serach = searchParams.get('search')
+
+    console.log(serach);
 
     return (
         <>
             <div className="container mt-[50px]">
-                <SearchBox setQuery={setQuery} serach={serach} />
+                <SearchBox />
 
                 <div className="mt-[80px] flex">
                     {!display.length && <Loader />}
